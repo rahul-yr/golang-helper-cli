@@ -47,6 +47,18 @@ func copyBoilerPlate() error {
 	return nil
 }
 
+func deleteRepo() error {
+	var stdErr bytes.Buffer
+	cmd := exec.Command("rm", "-rf", GITHUB_GO_CONFIGS["main_folder"]+"/")
+	cmd.Stderr = &stdErr
+	err := cmd.Run()
+	if err != nil {
+		log.Println(stdErr.String())
+		return err
+	}
+	return nil
+}
+
 func CreateGolangProject(args []string, index int) {
 	// create a new golang project
 	// name := args[index+1]
@@ -66,6 +78,12 @@ func CreateGolangProject(args []string, index int) {
 	if err := copyBoilerPlate(); err != nil {
 		return
 	}
+	log.Println("Deleting the cloned repo")
+	// delete the cloned repo
+	if err := deleteRepo(); err != nil {
+		return
+	}
+	log.Println("Done")
 }
 
 func Help() {
