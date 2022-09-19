@@ -1,4 +1,6 @@
 package helper
 
-const GITHUB_GO_CREATE_PROJECT string = "https://github.com/rahul-yr/container-template-golang-gin-webserver.git"
-const GITHUB_GO_CREATE_PROJECT_TEMPLATE_FOLDER string = "container-template-golang-gin-webserver/templates/"
+var GITHUB_GO_CONFIGS = map[string]string{
+	"repo":            "https://github.com/rahul-yr/container-template-golang-gin-webserver.git",
+	"create_template": "container-template-golang-gin-webserver/templates/create-project/*",
+}

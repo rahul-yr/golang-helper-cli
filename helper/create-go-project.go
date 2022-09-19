@@ -27,13 +27,13 @@ func CreateGolangProject(args []string, index int) {
 		log.Println("Dependencies are not installed i.e. go and git")
 	}
 	// clone a folder from github
-	cmd := exec.Command("git", "clone", GITHUB_GO_CREATE_PROJECT)
+	cmd := exec.Command("git", "clone", GITHUB_GO_CONFIGS["repo"])
 	err := cmd.Run()
 	if err != nil {
 		log.Println(err)
 	}
 	// copy the files from the cloned folder to the current directory
-	cmd = exec.Command("cp", "-r", GITHUB_GO_CREATE_PROJECT_TEMPLATE_FOLDER, ".")
+	cmd = exec.Command("cp", GITHUB_GO_CONFIGS["create_template"], ".")
 	err = cmd.Run()
 	if err != nil {
 		log.Println(err)
