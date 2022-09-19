@@ -59,6 +59,19 @@ func deleteRepo() error {
 	return nil
 }
 
+func createGoModule(name string) error {
+	// create a go module
+	var stdErr bytes.Buffer
+	cmd := exec.Command("go", "mod", "init", name)
+	cmd.Stderr = &stdErr
+	err := cmd.Run()
+	if err != nil {
+		log.Println(stdErr.String())
+		return err
+	}
+	return nil
+}
+
 func CreateGolangProject(args []string, index int) {
 	// create a new golang project
 	// name := args[index+1]
@@ -83,6 +96,12 @@ func CreateGolangProject(args []string, index int) {
 	if err := deleteRepo(); err != nil {
 		return
 	}
+	log.Println("Creating a go module")
+	// create a go module
+	if err := createGoModule(args[index+1]); err != nil {
+		return
+	}
+
 	log.Println("Done")
 }
 
