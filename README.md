@@ -1,6 +1,8 @@
 # golang-helper-cli
 
-go build -ldflags "-s -w" -o reddy-cli
+go build -ldflags "-s -w" -o rr
 sudo ls /usr/local/bin
-sudo cp reddy-cli /usr/local/bin
-reddy-cli --create-go rahul-yr/golang-test
+sudo cp rr /usr/local/bin
+rr --create-go rahul-yr/golang-test
+rr enable-addons firebase-auth
+go run . enable-addons firebase-auth

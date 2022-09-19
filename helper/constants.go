@@ -8,5 +8,5 @@ var GITHUB_GO_CONFIGS = map[string]string{
 	"firebase-auth": "container-template-golang-gin-webserver/boilerplate/firebase-auth.go",
 	"pubsub":        "container-template-golang-gin-webserver/boilerplate/pubsub.go",
 	"redis":         "container-template-golang-gin-webserver/boilerplate/redis.go",
-	"mongodb":       "container-template-golang-gin-webserver/boilerplate/mongodb.go",
+	"mongodb":       "container-template-golang-gin-webserver/boilerplate/mongo.go",
 }

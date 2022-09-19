@@ -6,10 +6,11 @@ import (
 	"os/exec"
 )
 
-func copyFirebaseBoilerPlate() error {
+func copyMongodbBoilerPlate() error {
 	// copy the boilerplate codes
 	var stdErr bytes.Buffer
-	cmd := exec.Command("cp", GITHUB_GO_CONFIGS["firebase-auth"], "boilerplate/")
+	log.Println(GITHUB_GO_CONFIGS["firebase-auth"])
+	cmd := exec.Command("cp", GITHUB_GO_CONFIGS["mongodb"], "boilerplate/")
 	cmd.Stderr = &stdErr
 	err := cmd.Run()
 	if err != nil {
@@ -19,18 +20,7 @@ func copyFirebaseBoilerPlate() error {
 	return nil
 }
 
-func createBoilerPlateFolder() {
-	// check boilerplate folder exists or not if not create one
-	var stdErr bytes.Buffer
-	cmd := exec.Command("mkdir", "boilerplate")
-	cmd.Stderr = &stdErr
-	err := cmd.Run()
-	if err != nil {
-		log.Println(stdErr.String())
-	}
-}
-
-func EnableFirebaseAuth() {
+func EnableMongoDB() {
 	// create boilerplate folder
 	log.Println("Creating boilerplate folder")
 	createBoilerPlateFolder()
@@ -41,7 +31,7 @@ func EnableFirebaseAuth() {
 	}
 	log.Println("Copy the boilerplate codes")
 	// copy the files from the cloned folder to the current directory
-	if err := copyFirebaseBoilerPlate(); err != nil {
+	if err := copyMongodbBoilerPlate(); err != nil {
 		return
 	}
 	log.Println("Delete the public repository")
