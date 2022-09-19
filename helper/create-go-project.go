@@ -72,6 +72,18 @@ func createGoModule(name string) error {
 	return nil
 }
 
+func updateGoModule() error {
+	var stdErr bytes.Buffer
+	cmd := exec.Command("go", "mod", "tidy")
+	cmd.Stderr = &stdErr
+	err := cmd.Run()
+	if err != nil {
+		log.Println(stdErr.String())
+		return err
+	}
+	return nil
+}
+
 func CreateGolangProject(args []string, index int) {
 	// create a new golang project
 	// name := args[index+1]
@@ -81,17 +93,17 @@ func CreateGolangProject(args []string, index int) {
 		// print error message
 		return
 	}
-	log.Println("Clone a repo")
+	log.Println("Clone the public repository")
 	// clone a folder from github
 	if err := cloneRepo(); err != nil {
 		return
 	}
-	log.Println("Copying the boilerplate codes")
+	log.Println("Copy the boilerplate codes")
 	// copy the files from the cloned folder to the current directory
 	if err := copyBoilerPlate(); err != nil {
 		return
 	}
-	log.Println("Deleting the cloned repo")
+	log.Println("Cleaning the repo")
 	// delete the cloned repo
 	if err := deleteRepo(); err != nil {
 		return
@@ -101,7 +113,11 @@ func CreateGolangProject(args []string, index int) {
 	if err := createGoModule(args[index+1]); err != nil {
 		return
 	}
-
+	log.Println("Updating the go module")
+	// update the go module
+	if err := updateGoModule(); err != nil {
+		return
+	}
 	log.Println("Done")
 }
 
