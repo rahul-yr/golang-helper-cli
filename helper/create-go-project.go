@@ -22,16 +22,19 @@ func CreateGolangProject(args []string, index int) {
 	// create a new golang project
 	// name := args[index+1]
 	// check if dependencies are installed
+	log.Println("Checking dependencies")
 	if err := checkDependencies(); err != nil {
 		// print error message
 		log.Println("Dependencies are not installed i.e. go and git")
 	}
+	log.Println("Clone the repo")
 	// clone a folder from github
 	cmd := exec.Command("git", "clone", GITHUB_GO_CONFIGS["repo"])
 	err := cmd.Run()
 	if err != nil {
 		log.Println(err)
 	}
+	log.Println("Copying the boilerplate codes")
 	// copy the files from the cloned folder to the current directory
 	cmd = exec.Command("cp", GITHUB_GO_CONFIGS["create_template"], ".")
 	err = cmd.Run()
