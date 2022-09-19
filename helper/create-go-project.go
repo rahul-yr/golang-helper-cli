@@ -120,7 +120,3 @@ func CreateGolangProject(args []string, index int) {
 	}
 	log.Println("Done")
 }
-
-func Help() {
-	log.Println("Help")
-}

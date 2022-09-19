@@ -5,24 +5,15 @@ import (
 	"rahul-yr/golang-helper-cli/helper"
 )
 
-var (
-	SA_CREATE_GOLANG_PROJECT = []string{
-		"--create-go",
-		"-cgo",
-	}
-	SA_HELP = []string{
-		"--help",
-		"-h",
-	}
-)
-
 func argumentsMapper(args []string) {
 	for index, arg := range args {
 		switch arg {
-		case SA_CREATE_GOLANG_PROJECT[0], SA_CREATE_GOLANG_PROJECT[1]:
+		case helper.SA_CREATE_GOLANG_PROJECT[0], helper.SA_CREATE_GOLANG_PROJECT[1]:
 			helper.CreateGolangProject(args, index)
-		case SA_HELP[0], SA_HELP[1]:
+		case helper.SA_HELP[0], helper.SA_HELP[1]:
 			helper.Help()
+		case helper.SA_ENABLE_ADDONS[0]:
+			helper.EnableAddons(args[index+1])
 		}
 	}
 }
