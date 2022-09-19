@@ -31,18 +31,33 @@ func CreateGolangProject(args []string, index int) {
 		log.Println(err)
 		return
 	}
-	log.Println("Clone the repo")
-	// clone a folder from github
-	cmd := exec.Command("git", "clone", GITHUB_GO_CONFIGS["repo"])
+	// check folder is exist or not
+	cmd := exec.Command("ls", "/"+GITHUB_GO_CONFIGS["main_folder"])
 	cmd.Stderr = &stdErr
 	err := cmd.Run()
+	if err != nil {
+		// delete the folder
+		cmd_delete := exec.Command("rm", "-rf", "/"+GITHUB_GO_CONFIGS["main_folder"])
+		cmd_delete.Stderr = &stdErr
+		err = cmd_delete.Run()
+		if err != nil {
+			log.Println("Error while deleting the folder")
+			log.Println(err)
+			return
+		}
+	}
+	log.Println("Clone a repo")
+	// clone a folder from github
+	cmd = exec.Command("git", "clone", GITHUB_GO_CONFIGS["repo"])
+	cmd.Stderr = &stdErr
+	err = cmd.Run()
 	if err != nil {
 		log.Println(stdErr.String())
 		return
 	}
 	log.Println("Copying the boilerplate codes")
 	// copy the files from the cloned folder to the current directory
-	cmd = exec.Command("cp", GITHUB_GO_CONFIGS["create_template"], ".")
+	cmd = exec.Command("cp", "-r", GITHUB_GO_CONFIGS["create_template_folder"]+"/.", ".")
 	cmd.Stderr = &stdErr
 	err = cmd.Run()
 	if err != nil {
